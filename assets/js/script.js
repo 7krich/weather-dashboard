@@ -8,7 +8,7 @@ var userInputEl = document.querySelector("#search");
 // current day container
 var currentDayEl = document.querySelector("#current-day-text");
 // given current day temp
-var tempEl = document.querySelector("#temp");
+var tempEl = document.getElementById("temp");
 // given current wind
 var windEl = document.querySelector("#wind");
 // given current humidity
@@ -74,15 +74,19 @@ function displayForecast(data) {
         return;
     }
 
+    if (data) {
+        tempEl.innerHTML = "Temperature: " + data.main.temp;
+    }
+
     // create current day text
-    var currentDay = document.createElement("div");
-    currentDay.classList = "list-item flex-row justify-space-between align-center";
+    // var currentDay = document.createElement("div");
+    // currentDay.classList = "list-item flex-row justify-space-between align-center";
 
-    var dayEl = document.createElement("span");
-    dayEl.textContent = data;
+    // var dayEl = document.createElement("span");
+    // dayEl.textContent = data;
 
-    // append to container
-    currentDay.appendChild(currentDayEl);
+    // // append to container
+    // currentDay.appendChild(currentDayEl);
 }
 
 // EVENT LISTENERS
