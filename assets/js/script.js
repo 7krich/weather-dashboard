@@ -1,8 +1,25 @@
+// 
 // DEFINE VARIABLES
+//
+// search form container
 var userFormEl = document.querySelector("#user-form");
-var searchEl = document.querySelector("#search");
-var currentForecastEl = document.querySelector("#current-forecast");
-var futureForecastEl = document.querySelector("#five-day-forecast");
+// text input
+var userInputEl = document.querySelector("#search");
+// current day container
+var currentDayEl = document.querySelector("#current-day-text");
+// given current day temp
+var tempEl = document.querySelector("#temp");
+// given current wind
+var windEl = document.querySelector("#wind");
+// given current humidity
+var humidityEl = document.querySelector("#humidity");
+// given current UV index
+var uvEl = document.querySelector("#UV-index");
+var historyEl = document.querySelector("#search-history");
+var fiveHeaderEl = document.querySelector("#five-day-header");
+var currentDayEl = document.querySelector("#current-day");
+let currentTime = {text: moment().format("h:00 A"), hour: moment().format("HH")};
+
 
 // HANDLE SUBMIT EVENT
 function formSubmitHandler(event) {
@@ -10,31 +27,33 @@ function formSubmitHandler(event) {
     event.preventDefault();
 
     // get value form input element
-    var cityName = searchEl.name.trim();
+    var cityName = userInputEl.value;
 
     if (cityName) {
         getWeatherInfo(cityName);
 
         // clear old content
-        searchEl.value = "";
+        userInputEl.value = "";
     } else {
         alert("Please enter a city");
     }
 };
 
 // GET CITY WEATHER INFO
-function getWeatherInfo(name) {
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + name + "&limit=5&appid=3737458997a633ff13858ff4dd053537";
+function getWeatherInfo(local_names) {
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + local_names + "&appid=3737458997a633ff13858ff4dd053537";
 
     // make get request to URL
     fetch(apiUrl)
     .then(function(response) {
         // request was successful
         if (response.ok) {
-            console.log(response);
-            response.json().then(function(data) {
+            // display current day in header
+            response.json()
+            .then(function(data) {
                 console.log(data);
-                displayForecast(data, name);
+                console.log(tempEl);
+                displayForecast(data);
             });
             // response recieved but error with request
         } else {
@@ -48,10 +67,10 @@ function getWeatherInfo(name) {
 };
 
 // DISPLAY 5 DAY FORECAST
-function displayForecast(name) {
+function displayForecast(data) {
     // check if API returned any cities
-    if (name.length === 0) {
-        currentForecastEl.textContent = "No cities by that name were found.";
+    if (data === 0) {
+        currentDayEl.textContent = "No cities by that name were found.";
         return;
     }
 
@@ -60,10 +79,10 @@ function displayForecast(name) {
     currentDay.classList = "list-item flex-row justify-space-between align-center";
 
     var dayEl = document.createElement("span");
-    dayEl.textContent = name;
+    dayEl.textContent = data;
 
     // append to container
-    currentDay.appendChild(currentForecastEl);
+    currentDay.appendChild(currentDayEl);
 }
 
 // EVENT LISTENERS
