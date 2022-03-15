@@ -20,6 +20,15 @@ var cityEl = document.querySelector("#city-name");
 var historyEl = document.querySelector("#search-history");
 var fiveHeaderEl = document.querySelector("#five-day-header");
 var currentDayEl = document.querySelector("#current-day");
+var fiveDayEl = document.querySelector(".five-day");
+var dayOneEl = document.querySelector(".day-1");
+var day2El = document.querySelector(".day-2");
+var day3El = document.querySelector("#day-3");
+var day4El = document.querySelector("#day-4");
+var day5El = document.querySelector("#day-5");
+
+
+
 
 
 // HANDLE SUBMIT EVENT
@@ -52,8 +61,7 @@ function getWeatherInfo(local_names) {
             // display current day in header
             response.json()
             .then(function(data) {
-                // console.log(data);
-                // console.log(tempEl);
+                console.log(data);
                 displayForecast(data);
             });
             // response recieved but error with request
@@ -92,7 +100,7 @@ function displayForecast(data) {
 
 //TAKE GEOCODE LON & LAT & REQUEST CALL FROM API WITH COORDINATES FOR ADDITIONAL DATA
 function getGeoInfo(lon, lat) {
-    var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=3737458997a633ff13858ff4dd053537`;
+    var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=3737458997a633ff13858ff4dd053537`;
 
     // make get request to URL
     fetch(apiUrl)
@@ -101,10 +109,13 @@ function getGeoInfo(lon, lat) {
         if (response.ok) {
             // display current day in header
             response.json()
+            // call data lonLat to discern from data
             .then(function(lonLat) {
                 console.log(lonLat);
                 // console.log(tempEl);
                 displayUv(lonLat);
+                displayFiveDay(lonLat);
+                displayDateInfo(currentDay);
             });
             // response recieved but error with request
         } else {
@@ -130,6 +141,55 @@ function displayUv(lonLat) {
         uvEl.innerHTML = "UV-Index: " + lonLat.current.uvi;
     }
 };
+
+// DISPLAY 5 DAY FORCAST & PULL DATA FROM LonLat
+function displayFiveDay(lonLat) {
+    for (var i = 0; i < lonLat.daily.length - 3; i++) {
+        
+        
+        console.log(lonLat.daily[i].feels_like.day);
+        const forecastDays = document.createElement("p");
+        forecastDays.innerText = lonLat.daily[i].feels_like.day;
+        document.body.appendChild(forecastDays);
+
+    }
+};
+
+// GET DATE INFO FOR 5 DAY FORECAST (NOT IN OTHER END POINT)
+function getDateInfo(lon, lat) {
+    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=3737458997a633ff13858ff4dd053537`;
+
+    // make get request to URL
+    fetch(apiUrl)
+    .then(function(response) {
+        // request was successful
+        if (response.ok) {
+            // display current day in header
+            response.json()
+            .then(function(currentDay) {
+                console.log(currentDay);
+                displayDateInfo(currentDay);
+            });
+            // response recieved but error with request
+        } else {
+            alert("Error: " + response.statusText);
+        }
+    })
+    // provide user info if server can't be reached
+    .catch(function(error) {
+        alert("Unable to connect to Open Weather");
+    });
+};
+
+function displayDateInfo(currentDay) {
+    // check if API returned any cities
+    if (currentDay) {
+        console.log(currentDay);
+        //uvEl.innerHTML = "UV-Index: " + lonLat.current.uvi;
+    }
+};
+
+
 
 // EVENT LISTENERS
 userFormEl.addEventListener("submit", formSubmitHandler);
