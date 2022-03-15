@@ -15,10 +15,11 @@ var windEl = document.querySelector("#wind");
 var humidityEl = document.querySelector("#humidity");
 // given current UV index
 var uvEl = document.querySelector("#UV-index");
+// city name
+var cityEl = document.querySelector("#city-name");
 var historyEl = document.querySelector("#search-history");
 var fiveHeaderEl = document.querySelector("#five-day-header");
 var currentDayEl = document.querySelector("#current-day");
-let currentTime = {text: moment().format("h:00 A"), hour: moment().format("HH")};
 
 
 // HANDLE SUBMIT EVENT
@@ -39,9 +40,9 @@ function formSubmitHandler(event) {
     }
 };
 
-// GET CITY WEATHER INFO
+// GET CITY WEATHER INFO - GEOCODE VERSION SO USER CAN TYPE CITY
 function getWeatherInfo(local_names) {
-    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + local_names + "&appid=3737458997a633ff13858ff4dd053537";
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + local_names + "&units=imperial&appid=3737458997a633ff13858ff4dd053537";
 
     // make get request to URL
     fetch(apiUrl)
@@ -75,19 +76,13 @@ function displayForecast(data) {
     }
 
     if (data) {
-        tempEl.innerHTML = "Temperature: " + data.main.temp;
+        cityEl.innerHTML = data.name;
+        tempEl.innerHTML = "Temperature: " + data.main.temp + "°";
+        windEl.innerHTML = "Wind Speed: " + data.wind.speed + "mph";
+        humidityEl.innerHTML = "Humidity: " + data.main.humidity + "%";
+        uvEl.innerHTML = "UV-Index: " + data.uvi + "";
     }
-
-    // create current day text
-    // var currentDay = document.createElement("div");
-    // currentDay.classList = "list-item flex-row justify-space-between align-center";
-
-    // var dayEl = document.createElement("span");
-    // dayEl.textContent = data;
-
-    // // append to container
-    // currentDay.appendChild(currentDayEl);
-}
+};
 
 // EVENT LISTENERS
 userFormEl.addEventListener("submit", formSubmitHandler);
