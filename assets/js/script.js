@@ -52,8 +52,8 @@ function getWeatherInfo(local_names) {
             // display current day in header
             response.json()
             .then(function(data) {
-                console.log(data);
-                console.log(tempEl);
+                // console.log(data);
+                // console.log(tempEl);
                 displayForecast(data);
             });
             // response recieved but error with request
@@ -80,7 +80,6 @@ function displayForecast(data) {
         tempEl.innerHTML = "Temperature: " + data.main.temp + "°";
         windEl.innerHTML = "Wind Speed: " + data.wind.speed + "mph";
         humidityEl.innerHTML = "Humidity: " + data.main.humidity + "%";
-        uvEl.innerHTML = "UV-Index: " + data.uvi;
     }
 
     // STORE LON & LAT FROM GETWEATHERINFO TO PASS THROUGH GETGEOINFO BELOW
@@ -102,9 +101,10 @@ function getGeoInfo(lon, lat) {
         if (response.ok) {
             // display current day in header
             response.json()
-            .then(function(data) {
-                console.log(data);
-                console.log(tempEl);
+            .then(function(lonLat) {
+                console.log(lonLat);
+                // console.log(tempEl);
+                displayUv(lonLat);
             });
             // response recieved but error with request
         } else {
@@ -115,6 +115,20 @@ function getGeoInfo(lon, lat) {
     .catch(function(error) {
         alert("Unable to connect to Open Weather");
     });
+};
+
+// DISPLAY CURRENT UV INDEX
+function displayUv(lonLat) {
+    // check if API returned any cities
+    if (lonLat === 0) {
+        currentDayEl.textContent = "No cities by that name were found.";
+        return;
+    }
+
+    if (lonLat) {
+        console.log(lonLat);
+        uvEl.innerHTML = "UV-Index: " + lonLat.current.uvi;
+    }
 };
 
 // EVENT LISTENERS
