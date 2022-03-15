@@ -21,11 +21,11 @@ var historyEl = document.querySelector("#search-history");
 var fiveHeaderEl = document.querySelector("#five-day-header");
 var currentDayEl = document.querySelector("#current-day");
 var fiveDayEl = document.querySelector(".five-day");
-var dayOneEl = document.querySelector(".day-1");
-var day2El = document.querySelector(".day-2");
-var day3El = document.querySelector("#day-3");
-var day4El = document.querySelector("#day-4");
-var day5El = document.querySelector("#day-5");
+var dayOneEl = document.querySelector("#day-1");
+var dayTwoEl = document.querySelector("#day-2");
+var dayThreeEl = document.querySelector("#day-3");
+var dayFourEl = document.querySelector("#day-4");
+var dayFiveEl = document.querySelector("#day-5");
 
 
 
@@ -155,15 +155,25 @@ function displayFiveDay(lonLat) {
         // display Date
         const forecastDate = document.createElement("p");
         forecastDate.innerText = humanDateFormat;
-        fiveDayEl.append(forecastDate);
+        if (i == 1) {
+            dayOneEl.append(forecastDate);
+        } else if (i == 2) {
+            dayTwoEl.append(forecastDate);
+        } else if (i == 3) {
+            dayThreeEl.append(forecastDate);
+        } else if (i == 4) {
+            dayFourEl.append(forecastDate);
+        } else {
+            dayFiveEl.append(forecastDate);
+        }
+        
+
 
         // 5 day temp
         console.log(lonLat.daily[i].feels_like.day);
         const forecastTemp = document.createElement("p");
         forecastTemp.innerText = "Temp: " + lonLat.daily[i].feels_like.day + "°";
         fiveDayEl.appendChild(forecastTemp);
-        // styles for 5 day
-        //forecastDays.style = "background:";
 
         // wind speed
         const forecastWind = document.createElement("p");
