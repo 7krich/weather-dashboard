@@ -155,25 +155,25 @@ function displayFiveDay(lonLat) {
         // display Date
         const forecastDate = document.createElement("p");
         forecastDate.innerText = humanDateFormat;
-        document.body.appendChild(forecastDate);
+        fiveDayEl.append(forecastDate);
 
         // 5 day temp
         console.log(lonLat.daily[i].feels_like.day);
         const forecastTemp = document.createElement("p");
         forecastTemp.innerText = "Temp: " + lonLat.daily[i].feels_like.day + "°";
-        document.body.appendChild(forecastTemp);
+        fiveDayEl.appendChild(forecastTemp);
         // styles for 5 day
         //forecastDays.style = "background:";
 
         // wind speed
         const forecastWind = document.createElement("p");
         forecastWind.innerText = "Wind Speed: " + lonLat.daily[i].wind_speed + " mph";
-        document.body.appendChild(forecastWind);
+        fiveDayEl.appendChild(forecastWind);
 
         // humidity
         const forecastHumidity = document.createElement("p");
         forecastHumidity.innerText = "Humidity: " + lonLat.daily[i].humidity + "%";
-        document.body.appendChild(forecastHumidity);
+        fiveDayEl.appendChild(forecastHumidity);
 
     }
 };
