@@ -67,7 +67,7 @@ function getWeatherInfo(local_names) {
     });
 };
 
-// DISPLAY 5 DAY FORECAST
+// DISPLAY CURRENT DAY FORECAST
 function displayForecast(data) {
     // check if API returned any cities
     if (data === 0) {
@@ -80,8 +80,41 @@ function displayForecast(data) {
         tempEl.innerHTML = "Temperature: " + data.main.temp + "°";
         windEl.innerHTML = "Wind Speed: " + data.wind.speed + "mph";
         humidityEl.innerHTML = "Humidity: " + data.main.humidity + "%";
-        uvEl.innerHTML = "UV-Index: " + data.uvi + "";
+        uvEl.innerHTML = "UV-Index: " + data.uvi;
     }
+
+    // STORE LON & LAT FROM GETWEATHERINFO TO PASS THROUGH GETGEOINFO BELOW
+    if (data){
+    let lon = data.coord.lon;
+    let lat = data.coord.lat;
+    getGeoInfo(lon, lat);
+    }
+};
+
+//TAKE GEOCODE LON & LAT & REQUEST CALL FROM API WITH COORDINATES FOR ADDITIONAL DATA
+function getGeoInfo(lon, lat) {
+    var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=3737458997a633ff13858ff4dd053537`;
+
+    // make get request to URL
+    fetch(apiUrl)
+    .then(function(response) {
+        // request was successful
+        if (response.ok) {
+            // display current day in header
+            response.json()
+            .then(function(data) {
+                console.log(data);
+                console.log(tempEl);
+            });
+            // response recieved but error with request
+        } else {
+            alert("Error: " + response.statusText);
+        }
+    })
+    // provide user info if server can't be reached
+    .catch(function(error) {
+        alert("Unable to connect to Open Weather");
+    });
 };
 
 // EVENT LISTENERS
