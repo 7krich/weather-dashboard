@@ -115,7 +115,6 @@ function getGeoInfo(lon, lat) {
                 // console.log(tempEl);
                 displayUv(lonLat);
                 displayFiveDay(lonLat);
-                displayDateInfo(currentDay);
             });
             // response recieved but error with request
         } else {
@@ -146,48 +145,29 @@ function displayUv(lonLat) {
 function displayFiveDay(lonLat) {
     for (var i = 0; i < lonLat.daily.length - 3; i++) {
         
-        
+        // Date
+        // convert unix to readable day
+        const unixTimestamp = lonLat.daily[i].dt;
+        const milliseconds = unixTimestamp * 1000;
+        const dateObject = new Date(milliseconds);
+        const humanDateFormat = dateObject.toLocaleString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        console.log(humanDateFormat);
+        // display Date
+        const forecastDate = document.createElement("p");
+        forecastDate.innerText = humanDateFormat;
+        document.body.appendChild(forecastDate);
+        // 5 day temp
         console.log(lonLat.daily[i].feels_like.day);
         const forecastDays = document.createElement("p");
-        forecastDays.innerText = lonLat.daily[i].feels_like.day;
+        forecastDays.innerText = "Temp: " + lonLat.daily[i].feels_like.day;
         document.body.appendChild(forecastDays);
+        // styles for 5 day
+        //forecastDays.style = "background:";
 
     }
 };
 
-// GET DATE INFO FOR 5 DAY FORECAST (NOT IN OTHER END POINT)
-function getDateInfo(lon, lat) {
-    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=3737458997a633ff13858ff4dd053537`;
 
-    // make get request to URL
-    fetch(apiUrl)
-    .then(function(response) {
-        // request was successful
-        if (response.ok) {
-            // display current day in header
-            response.json()
-            .then(function(currentDay) {
-                console.log(currentDay);
-                displayDateInfo(currentDay);
-            });
-            // response recieved but error with request
-        } else {
-            alert("Error: " + response.statusText);
-        }
-    })
-    // provide user info if server can't be reached
-    .catch(function(error) {
-        alert("Unable to connect to Open Weather");
-    });
-};
-
-function displayDateInfo(currentDay) {
-    // check if API returned any cities
-    if (currentDay) {
-        console.log(currentDay);
-        //uvEl.innerHTML = "UV-Index: " + lonLat.current.uvi;
-    }
-};
 
 
 

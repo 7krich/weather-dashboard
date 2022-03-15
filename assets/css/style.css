@@ -27,6 +27,7 @@ h2 {
     transition-duration: 0.4s;
     letter-spacing: 3px;
     margin-left: 10px;
+    max-height: 44px;
 }
 
 .btn:hover {
