@@ -155,35 +155,51 @@ function displayFiveDay(lonLat) {
         // display Date
         const forecastDate = document.createElement("p");
         forecastDate.innerText = humanDateFormat;
-        if (i == 1) {
-            dayOneEl.append(forecastDate);
-        } else if (i == 2) {
-            dayTwoEl.append(forecastDate);
-        } else if (i == 3) {
-            dayThreeEl.append(forecastDate);
-        } else if (i == 4) {
-            dayFourEl.append(forecastDate);
-        } else {
-            dayFiveEl.append(forecastDate);
-        }
         
-
-
         // 5 day temp
         console.log(lonLat.daily[i].feels_like.day);
         const forecastTemp = document.createElement("p");
         forecastTemp.innerText = "Temp: " + lonLat.daily[i].feels_like.day + "°";
-        fiveDayEl.appendChild(forecastTemp);
+        //fiveDayEl.appendChild(forecastTemp);
 
         // wind speed
         const forecastWind = document.createElement("p");
         forecastWind.innerText = "Wind Speed: " + lonLat.daily[i].wind_speed + " mph";
-        fiveDayEl.appendChild(forecastWind);
+        //fiveDayEl.appendChild(forecastWind);
 
         // humidity
         const forecastHumidity = document.createElement("p");
         forecastHumidity.innerText = "Humidity: " + lonLat.daily[i].humidity + "%";
-        fiveDayEl.appendChild(forecastHumidity);
+        //fiveDayEl.appendChild(forecastHumidity);
+
+        // display information in certain div based on index date
+        if (i == 1) {
+            dayOneEl.append(forecastDate);
+            dayOneEl.append(forecastTemp);
+            dayOneEl.append(forecastWind);
+            dayOneEl.append(forecastHumidity);
+        } else if (i == 2) {
+            dayTwoEl.append(forecastDate);
+            dayTwoEl.append(forecastTemp);
+            dayTwoEl.append(forecastWind);
+            dayTwoEl.append(forecastHumidity);
+        } else if (i == 3) {
+            dayThreeEl.append(forecastDate);
+            dayThreeEl.append(forecastTemp);
+            dayThreeEl.append(forecastWind);
+            dayThreeEl.append(forecastHumidity);
+        } else if (i == 4) {
+            dayFourEl.append(forecastDate);
+            dayFourEl.append(forecastTemp);
+            dayFourEl.append(forecastWind);
+            dayFourEl.append(forecastHumidity);
+        } else {
+            dayFiveEl.append(forecastDate);
+            dayFiveEl.append(forecastTemp);
+            dayFiveEl.append(forecastWind);
+            dayFiveEl.append(forecastHumidity);
+        };
+
 
     }
 };

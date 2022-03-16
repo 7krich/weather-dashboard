@@ -6,6 +6,7 @@ body {
 
 h2 {
     text-align: center;
+    margin: none;
 }
 
 .form-input {
@@ -16,18 +17,21 @@ h2 {
 #user-form {
     padding-bottom: 20px;
     padding-top: 20px;
+    margin: auto;
+    width: 50%;
+}
+
+.card {
+    margin: none;
+}
+
+#search-button-container {
+    margin: auto;
+    width: 50%;
 }
 
 .btn {
-    padding: 10px 20px 10px 20px;
-    background: rgb(65, 136, 168);
-    border: none;
-    color: rgb(0, 0, 0);
-    border-radius: 40px;
-    transition-duration: 0.4s;
-    letter-spacing: 3px;
-    margin-left: 10px;
-    max-height: 44px;
+    margin-top: 10px;
 }
 
 .btn:hover {
@@ -39,4 +43,21 @@ h2 {
 .city-name {
     font-style: bolder;
     font-size: 30px;
+}
+
+#five-day-container {
+    border: 1px gray solid;
+    border-radius: 4px;
+}
+.current {
+    border: 1px gray solid;
+    border-radius: 4px;
+}
+
+.flex {
+    flex-wrap: wrap;
+}
+
+.day {
+    font-size: 8px;
 }
