@@ -1,4 +1,4 @@
-body {
+h1 {
     font-family: 'DM Sans', sans-serif;
     font-family: 'Open Sans', sans-serif;
     font-family: 'Source Sans Pro', sans-serif;
@@ -19,16 +19,31 @@ h2 {
     padding-bottom: 20px;
     padding-top: 20px;
     margin: auto;
-    width: 50%;
+}
+
+#input-container {
+    margin: auto;
+    text-align: center;
 }
 
 .card {
     margin: none;
 }
 
-#search-button-container {
-    margin: auto;
-    width: 50%;
+#search-box {
+    margin: 20px;
+}
+
+#button-container, #search-history {
+    align-items: center;
+}
+
+#button-container1 {
+    padding-left: 85px;
+}
+
+#button-container2 {
+    padding-left: 70px;
 }
 
 .btn {
@@ -53,6 +68,13 @@ h2 {
 .current {
     border: 1px gray solid;
     border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.current-content {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
 }
 
 .flex {

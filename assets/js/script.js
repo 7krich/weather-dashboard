@@ -86,7 +86,7 @@ function displayForecast(data) {
 
     if (data) {
         cityEl.innerHTML = data.name;
-        tempEl.innerHTML = "Temperature: " + data.main.temp + "°";
+        tempEl.innerHTML = "Temperature: " + data.main.temp + "°F";
         windEl.innerHTML = "Wind Speed: " + data.wind.speed + "mph";
         humidityEl.innerHTML = "Humidity: " + data.main.humidity + "%";
     }
@@ -168,7 +168,7 @@ function displayFiveDay(lonLat) {
         // 5 day temp
         console.log(lonLat.daily[i].feels_like.day);
         const forecastTemp = document.createElement("p");
-        forecastTemp.innerText = "Temp: " + lonLat.daily[i].feels_like.day + "°";
+        forecastTemp.innerText = "Temp: " + lonLat.daily[i].feels_like.day + "°F";
         //fiveDayEl.appendChild(forecastTemp);
 
         // wind speed
@@ -244,8 +244,6 @@ function handleHistoryClick(event) {
 
         // clear old content
         userInputEl.value = "";
-    } else {
-        alert("Please enter a city");
     }
 };
 
