@@ -28,7 +28,7 @@ var dayFourEl = document.querySelector("#day-4");
 var dayFiveEl = document.querySelector("#day-5");
 const searchEl = document.getElementById("search-button-container");
 const clearEl = document.getElementById("clear-history");
-let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
+let searchHistory = JSON.parse(localStorage.getItem("search"));
 
 
 // HANDLE SUBMIT EVENT
@@ -41,6 +41,7 @@ function formSubmitHandler(event) {
 
     if (cityName) {
         getWeatherInfo(cityName);
+        addToSearchHistory();
 
         // clear old content
         userInputEl.value = "";
@@ -182,26 +183,31 @@ function displayFiveDay(lonLat) {
 
         // display information in certain div based on index date
         if (i == 1) {
+            dayOneEl.innerHTML = ""
             dayOneEl.append(forecastDate);
             dayOneEl.append(forecastTemp);
             dayOneEl.append(forecastWind);
             dayOneEl.append(forecastHumidity);
         } else if (i == 2) {
+            dayTwoEl.innerHTML = ""
             dayTwoEl.append(forecastDate);
             dayTwoEl.append(forecastTemp);
             dayTwoEl.append(forecastWind);
             dayTwoEl.append(forecastHumidity);
         } else if (i == 3) {
+            dayThreeEl.innerHTML = ""
             dayThreeEl.append(forecastDate);
             dayThreeEl.append(forecastTemp);
             dayThreeEl.append(forecastWind);
             dayThreeEl.append(forecastHumidity);
         } else if (i == 4) {
+            dayFourEl.innerHTML = ""
             dayFourEl.append(forecastDate);
             dayFourEl.append(forecastTemp);
             dayFourEl.append(forecastWind);
             dayFourEl.append(forecastHumidity);
         } else {
+            dayFiveEl.innerHTML = ""
             dayFiveEl.append(forecastDate);
             dayFiveEl.append(forecastTemp);
             dayFiveEl.append(forecastWind);
@@ -210,17 +216,44 @@ function displayFiveDay(lonLat) {
     }
 };
 
-// Get history from local storage if any
-// userFormEl.addEventListener("click", function () {
+function addToSearchHistory () {
+    if (!searchHistory) {
+        searchHistory = [];
+    }
+    searchHistory.push(userInputEl.value);
+    localStorage.setItem("search", JSON.stringify(searchHistory));
 
-//     localStorage.setItem(userInputEl.data, displayFiveDay());
-// })
+    historyEl.insertAdjacentHTML("afterbegin", `<button id="${userInputEl.value}" onclick = "handleHistoryClick(event)">${userInputEl.value}</button>`)
+};
 
-// var input = document.getElementById("saveServer");
-// localStorage.setItem("server", input.val());
+if (searchHistory) {
+    for (let i = 0; i < searchHistory.length; i++) {
+        historyEl.insertAdjacentHTML("afterbegin", `<button id="${searchHistory[i]}" onclick = "handleHistoryClick(event)">${searchHistory[i]}</button>`)
+    }
+};
 
-// var storedValue = localStorage.getItem("server");
+function handleHistoryClick(event) {
+    // prevent page from refreshing
+    event.preventDefault();
 
+    // get value form input element
+    var cityName = event.target.id;
+
+    if (cityName) {
+        getWeatherInfo(cityName);
+
+        // clear old content
+        userInputEl.value = "";
+    } else {
+        alert("Please enter a city");
+    }
+};
+
+function clearSearch() {
+    historyEl.innerHTML = "";
+    localStorage.clear();
+
+}
 
 // EVENT LISTENERS
 userFormEl.addEventListener("submit", formSubmitHandler);
