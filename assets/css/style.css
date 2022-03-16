@@ -84,3 +84,13 @@ h2 {
 .day {
     font-size: 8px;
 }
+
+#day-1, #day-2, #day-3, #day-4, #day-5 {
+    background-color: rgb(72, 72, 192);
+    color: white;
+    border: 1px solid white;
+}
+
+#spacer {
+    margin-right: 30px;
+}
