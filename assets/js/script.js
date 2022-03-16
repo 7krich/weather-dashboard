@@ -26,9 +26,9 @@ var dayTwoEl = document.querySelector("#day-2");
 var dayThreeEl = document.querySelector("#day-3");
 var dayFourEl = document.querySelector("#day-4");
 var dayFiveEl = document.querySelector("#day-5");
-
-
-
+const searchEl = document.getElementById("search-button-container");
+const clearEl = document.getElementById("clear-history");
+let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 
 
 // HANDLE SUBMIT EVENT
@@ -139,6 +139,14 @@ function displayUv(lonLat) {
         console.log(lonLat);
         uvEl.innerHTML = "UV-Index: " + lonLat.current.uvi;
     }
+
+    if (lonLat.current.uvi <= 2) {
+        uvEl.style.backgroundColor = "#5CF144";
+    } else if (lonLat.current.uvi <= 5) {
+        uvEl.style.backgroundColor = "#FAFA75";
+    } else {
+        uvEl.style.backgroundColor = "#FE1515";
+    }
 };
 
 // DISPLAY 5 DAY FORCAST & PULL DATA FROM LonLat
@@ -199,13 +207,19 @@ function displayFiveDay(lonLat) {
             dayFiveEl.append(forecastWind);
             dayFiveEl.append(forecastHumidity);
         };
-
-
     }
 };
 
+// Get history from local storage if any
+// userFormEl.addEventListener("click", function () {
 
+//     localStorage.setItem(userInputEl.data, displayFiveDay());
+// })
 
+// var input = document.getElementById("saveServer");
+// localStorage.setItem("server", input.val());
+
+// var storedValue = localStorage.getItem("server");
 
 
 // EVENT LISTENERS
