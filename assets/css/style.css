@@ -61,12 +61,8 @@ h2 {
     font-size: 30px;
 }
 
-#five-day-container {
-    border: 1px gray solid;
-    border-radius: 4px;
-}
 .current {
-    border: 1px gray solid;
+
     border-radius: 4px;
     margin-bottom: 20px;
 }

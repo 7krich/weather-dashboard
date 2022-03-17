@@ -62,7 +62,7 @@ function getWeatherInfo(local_names) {
             // display current day in header
             response.json()
             .then(function(data) {
-                console.log(data);
+                //console.log(data);
                 displayForecast(data);
             });
             // response recieved but error with request
@@ -137,7 +137,7 @@ function displayUv(lonLat) {
     }
 
     if (lonLat) {
-        console.log(lonLat);
+        //console.log(lonLat);
         uvEl.innerHTML = "UV-Index: " + lonLat.current.uvi;
     }
 
@@ -160,13 +160,13 @@ function displayFiveDay(lonLat) {
         const milliseconds = unixTimestamp * 1000;
         const dateObject = new Date(milliseconds);
         const humanDateFormat = dateObject.toLocaleString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        console.log(humanDateFormat);
+        //console.log(humanDateFormat);
         // display Date
         const forecastDate = document.createElement("p");
         forecastDate.innerText = humanDateFormat;
         
         // 5 day temp
-        console.log(lonLat.daily[i].feels_like.day);
+        //console.log(lonLat.daily[i].feels_like.day);
         const forecastTemp = document.createElement("p");
         forecastTemp.innerText = "Temp: " + lonLat.daily[i].feels_like.day + "°F";
         //fiveDayEl.appendChild(forecastTemp);
@@ -180,6 +180,11 @@ function displayFiveDay(lonLat) {
         const forecastHumidity = document.createElement("p");
         forecastHumidity.innerText = "Humidity: " + lonLat.daily[i].humidity + "%";
         //fiveDayEl.appendChild(forecastHumidity);
+
+        forecastDate.style.fontWeight = "bold";
+        forecastDate.style.fontSize = "12px";
+        forecastDate.style.paddingTop = "6px";
+
 
         // display information in certain div based on index date
         if (i == 1) {
