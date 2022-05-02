@@ -8,10 +8,15 @@ h2 {
     font-family: 'DM Sans', sans-serif;
     font-family: 'Open Sans', sans-serif;
     font-family: 'Source Sans Pro', sans-serif;
+    text-align: center;
+}
+
+#user-form {
+    text-align: center;
+    margin: auto; 
 }
 
 #input-container {
-    text-align: center;
     margin: auto;
     width: 50%;
 }
@@ -36,11 +41,40 @@ h2 {
     margin: auto;
     margin-bottom: 10px;
     width: 50%;
-    padding-left: 17.5px;
 }
 
 #button-container2 {
     margin: auto;
     margin-bottom: 10px;
     width: 50%;
+    padding-left: 70px;
+}
+
+.forecast {
+    text-align: center;
+}
+
+.current-content {
+    margin: auto;
+    width: 50%;
+}
+
+.hist-button {
+    background-color: #28a7a7;
+    border: none;
+    color: white;
+    padding-left: 110px;
+    text-decoration: none;
+    font-size: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    margin: 5px auto 5px auto;
+    width: 50%;
+    border-radius: 4px;
+}
+
+#user-form {
+    text-align: center;
+    margin: auto; 
 }
