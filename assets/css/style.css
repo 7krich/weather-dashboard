@@ -5,88 +5,42 @@ h1 {
 }
 
 h2 {
-    text-align: center;
-    margin: none;
-    font-size: 20px;
-}
-
-.form-input {
-    padding: 10px;
-    border-radius: 4px;
-}
-
-#user-form {
-    padding-bottom: 20px;
-    padding-top: 20px;
-    margin: auto;
+    font-family: 'DM Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 #input-container {
-    margin: auto;
     text-align: center;
+    margin: auto;
+    width: 50%;
 }
 
-.card {
-    margin: none;
+.search-container {
+    margin: auto;
+    width: 50%;
 }
 
-#search-box {
-    margin: 20px;
+.form-input {
+    margin: 10%;
+    padding: 10px;
+    border-radius: 10px;
 }
 
-#button-container, #search-history {
-    align-items: center;
+.form-lable {
+    margin: auto;
+    width: 50%;
 }
 
 #button-container1 {
-    padding-left: 85px;
+    margin: auto;
+    margin-bottom: 10px;
+    width: 50%;
+    padding-left: 17.5px;
 }
 
 #button-container2 {
-    padding-left: 70px;
-}
-
-.btn {
-    margin-top: 10px;
-}
-
-.btn:hover {
-    background-color: rgb(42, 88, 109);
-    color: rgb(255, 255, 255);
-    box-shadow: 0 12px 16px 0 rgba(202, 202, 202, 0.24), 0 17px 50px 0 rgba(199, 199, 199, 0.19);
-}
-
-.city-name {
-    font-style: bolder;
-    font-size: 30px;
-}
-
-.current {
-
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-
-.current-content {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 20px;
-}
-
-.flex {
-    flex-wrap: wrap;
-}
-
-.day {
-    font-size: 8px;
-}
-
-#day-1, #day-2, #day-3, #day-4, #day-5 {
-    background-color: rgb(72, 72, 192);
-    color: white;
-    border: 1px solid white;
-}
-
-#spacer {
-    margin-right: 30px;
+    margin: auto;
+    margin-bottom: 10px;
+    width: 50%;
 }
